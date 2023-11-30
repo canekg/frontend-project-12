@@ -1,8 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-// import { useTranslation } from 'react-i18next';
-// import Navigation from '../../Navigation';
-// import routes from '../../routes';
-// import empty from '../../assets/404.jpg';
 
 import React, { useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
