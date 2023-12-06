@@ -1,13 +1,10 @@
-const baseUrl = 'api/v1';
-const routes = {
-  api: {
-    login: `${baseUrl}/login`,
-    signup: `${baseUrl}/signup`,
-    data: `${baseUrl}/data`,
-  },
-  mainPage: '/',
-  loginPage: '/login',
-  signupPage: '/signup',
-};
+const apiPath = '/api/v1';
 
-export default routes;
+export default {
+  loginPath: () => [apiPath, 'login'].join('/'),
+  home: () => '/',
+  login: () => '/login',
+  signup: () => '/signup',
+  signupPage: () => [apiPath, 'signup'].join('/'),
+  dataPath: () => [apiPath, 'data'].join('/'),
+};
