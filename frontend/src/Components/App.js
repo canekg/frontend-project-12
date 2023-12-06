@@ -17,15 +17,15 @@ import routes from '../routes';
 import { useAuth } from '../hooks/index.js';
 import 'react-toastify/dist/ReactToastify.css';
 
-// const PrivateRoute = ({ children }) => {
-//   const location = useLocation();
-//   const auth = useAuth();
-//   return auth.user ? (
-//     children
-//   ) : (
-//     <Navigate to={routes.login()} state={{ from: location }} />
-//   );
-// };
+const PrivateRoute = ({ children }) => {
+  const location = useLocation();
+  const auth = useAuth();
+  return auth.user ? (
+    children
+  ) : (
+    <Navigate to={routes.login()} state={{ from: location }} />
+  );
+};
 
 const LogOut = () => {
   const auth = useAuth();
@@ -47,14 +47,14 @@ const App = () => {
           </Container>
         </Navbar>
         <Routes>
-          {/* <Route
+          <Route
             index
             element={(
               <PrivateRoute>
                 <MainPage />
               </PrivateRoute>
             )}
-          /> */}
+          />
           <Route path={routes.home()} element={<MainPage />} />
           <Route path={routes.login()} element={<LoginPage />} />
           {/* <Route path={routes.signup()} element={<SignupPage />} /> */}
