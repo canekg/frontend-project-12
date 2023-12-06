@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import Navigation from '../../Navigation';
 import routes from '../../routes';
-import empty from '../../assets/404.jpg';
+import empty from '../../assets/404.png';
 
 const EmptyPage = () => {
   const { t } = useTranslation('translation');
@@ -10,11 +11,11 @@ const EmptyPage = () => {
       <Navigation />
       <div className="text-center">
         <img src={empty} alt={t('emptyPage.emptyPage')} className="img-fluid" id="error" />
-        <h1 className="h4 text-muted">{t('emptyPage.emptyPage')}</h1>
+        <h1 className="h4 text-muted">{t('notFound')}</h1>
         <p className="text-muted">
-          {t('emptyPage.pageLink1')}
+          {t('returnToHome')}
           {' '}
-          <a href={routes.mainPage}>{t('emptyPage.pageLink2')}</a>
+          <Link to={routes.home()}>{t('toMain')}</Link>
         </p>
       </div>
     </>
