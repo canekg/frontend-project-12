@@ -3,8 +3,8 @@ import {
   Routes,
   Route,
   Link,
-  // useLocation,
-  // Navigate,
+  useLocation,
+  Navigate,
 } from 'react-router-dom';
 import { Navbar, Container, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
