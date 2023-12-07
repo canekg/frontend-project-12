@@ -20,6 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
   const auth = useAuth();
+  console.log(auth.user);
   return auth.user ? (
     children
   ) : (
