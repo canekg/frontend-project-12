@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 import { Modal, Button, Form } from 'react-bootstrap';
@@ -14,10 +15,7 @@ const Add = () => {
   const { t } = useTranslation();
   const socket = useSocket();
   const inputRef = useRef(null);
-  // eslint-disable-next-line arrow-body-style
-  const existingChannels = useSelector((state) => {
-    return state.channelsInfo.channels.map((channel) => channel.name);
-  });
+  const existingChannels = useSelector((state) => state.channelsInfo.channels.map((channel) => channel.name));
   const dispath = useDispatch();
   const isOpened = useSelector((state) => state.modal.isOpened);
   const rollbar = useRollbar();

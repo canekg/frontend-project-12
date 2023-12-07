@@ -1,7 +1,11 @@
-import { useState, useCallback, useMemo } from 'react';
+import {
+  createContext, useState, useCallback, useMemo,
+} from 'react';
 import axios from 'axios';
 import routes from '../routes';
-import { AuthContext } from '../hooks';
+// import { AuthContext } from '../hooks';
+
+export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
