@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
 import LoginPage from './pages/Login.jsx';
 import NotFoundPage from './pages/Empty.jsx';
-// import SignupPage from './pages/Signup.jsx';
+import SignupPage from './pages/Signup.jsx';
 import MainPage from './pages/Main.jsx';
 import routes from '../routes';
 import { useAuth } from '../hooks/index.js';
@@ -58,7 +58,7 @@ const App = () => {
           />
           <Route path={routes.home()} element={<MainPage />} />
           <Route path={routes.login()} element={<LoginPage />} />
-          {/* <Route path={routes.signup()} element={<SignupPage />} /> */}
+          <Route path={routes.signup()} element={<SignupPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <ToastContainer />
