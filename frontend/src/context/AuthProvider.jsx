@@ -3,7 +3,6 @@ import {
 } from 'react';
 import axios from 'axios';
 import routes from '../routes';
-// import { AuthContext } from '../hooks';
 
 export const AuthContext = createContext({});
 

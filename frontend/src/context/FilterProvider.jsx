@@ -1,8 +1,6 @@
 import filter from 'leo-profanity';
 import { createContext, useCallback } from 'react';
 
-// import { FilterContext } from '../hooks';
-
 export const FilterContext = createContext({});
 
 const FilterProvider = ({ children }) => {
