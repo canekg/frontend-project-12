@@ -34,18 +34,15 @@ const Messages = () => {
   return (
     <div className="col p-0 h-100">
       <div className="d-flex flex-column h-100">
-        {/* блок шапки */}
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
             <b>{`# ${currentName}`}</b>
           </p>
           <span className="text-muted">{t('messagesCounter.messages', { count: currentMesseges.length })}</span>
         </div>
-        {/* блок вывода сообщений */}
         <div id="messages-box" ref={messagesRef} className="chat-messages overflow-auto px-5 ">
           {listMessages}
         </div>
-        {/* блок формы отправки формы */}
         <NewMessegeForm />
       </div>
     </div>

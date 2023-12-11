@@ -40,7 +40,7 @@ const SignupPage = () => {
       confirmPassword: yup
         .string()
         .oneOf([yup.ref('password')], t('validation.passwordMatch'))
-        .required(t('validation.emptyField')), // Добавляем правило обязательности
+        .required(t('validation.emptyField')),
     }),
     onSubmit: async ({ username, password }) => {
       try {
