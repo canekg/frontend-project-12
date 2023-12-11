@@ -1,8 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/canekg/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/canekg/frontend-project-12/actions)
 
-**[Chat Slack](https://hexletchatproject.onrender.com)**
-
 # Chat App
 
 This project contains a version of chat built using React and Redux. The goal of the project is to demonstrate a wide range of common tasks that front-end developers face in real life. Key features include:
