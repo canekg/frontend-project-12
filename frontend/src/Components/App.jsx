@@ -13,8 +13,8 @@ import LoginPage from './pages/Login.jsx';
 import NotFoundPage from './pages/Empty.jsx';
 import SignupPage from './pages/Signup.jsx';
 import MainPage from './pages/Main.jsx';
-import routes from '../routes';
-import { useAuth } from '../hooks/index.js';
+import routes from '../routes.js';
+import { useAuth } from '../context/AuthProvider.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 
 const PrivateRoute = ({ children }) => {
