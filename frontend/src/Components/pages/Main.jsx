@@ -4,9 +4,10 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import Channels from '../chat/Channels';
 import Messages from '../chat/Messages';
-import { useAuth } from '../../hooks';
+import { useAuth } from '../../context/AuthProvider.jsx';
 import getDataChannels from '../../api/getDataChannels';
 import getModalComponent from '../Modals/index.js';
+import { getTypeModal } from '../../selectors/index.js';
 
 const MainPage = () => {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const { token } = auth.user;
   const header = token ? { Authorization: `Bearer ${token}` } : {};
-  const type = useSelector((state) => state.modal.type);
+  const type = useSelector(getTypeModal);
 
   useEffect(() => {
     const fetchData = async () => {

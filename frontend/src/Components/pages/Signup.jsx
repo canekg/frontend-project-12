@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useEffect, useRef } from 'react';
 import avatarReg from '../../assets/avatarReg.jpg';
 import routes from '../../routes.js';
-import { useAuth } from '../../hooks/index.js';
+import { useAuth } from '../../context/AuthProvider.jsx';
 
 const SignupPage = () => {
   const inputName = useRef(null);

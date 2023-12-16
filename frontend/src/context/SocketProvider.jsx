@@ -1,8 +1,11 @@
-import { createContext, useMemo, useCallback } from 'react';
+import {
+  createContext, useMemo, useCallback, useContext,
+} from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
-export const SocketContext = createContext({});
+const SocketContext = createContext({});
+export const useSocket = () => useContext(SocketContext);
 
 const SocketProvider = ({ socket, children }) => {
   const { t } = useTranslation();

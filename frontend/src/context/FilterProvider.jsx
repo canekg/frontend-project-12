@@ -1,7 +1,8 @@
 import filter from 'leo-profanity';
-import { createContext, useCallback } from 'react';
+import { createContext, useCallback, useContext } from 'react';
 
-export const FilterContext = createContext({});
+const FilterContext = createContext({});
+export const useFilter = () => useContext(FilterContext);
 
 const FilterProvider = ({ children }) => {
   filter.add(filter.getDictionary('ru'));
