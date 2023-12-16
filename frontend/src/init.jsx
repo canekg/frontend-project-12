@@ -3,7 +3,7 @@ import { I18nextProvider, initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import io from 'socket.io-client';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
-import App from './Components/App.js';
+import App from './Components/App.jsx';
 import resources from './locales/index.js';
 import AuthProvider from './context/AuthProvider.jsx';
 import SocketProvaider from './context/SocketProvider.jsx';
