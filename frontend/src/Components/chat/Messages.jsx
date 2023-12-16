@@ -2,15 +2,16 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useRef, useEffect } from 'react';
 import NewMessegeForm from './NewMessegeForm';
-import { useAuth } from '../../hooks';
+import { useAuth } from '../../context/AuthProvider.jsx';
+import { getChannelsInfo, getMessagesInfo } from '../../selectors/index.js';
 
 const Messages = () => {
   const messagesRef = useRef(null);
-  const { channels, currentChannelId } = useSelector((state) => state.channelsInfo);
+  const { channels, currentChannelId } = useSelector(getChannelsInfo);
   const currentChannel = channels.filter((channel) => currentChannelId === channel.id)[0];
   const currentName = currentChannel ? currentChannel.name : '';
   const { t } = useTranslation();
-  const messages = useSelector((state) => state.messagesInfo.messages);
+  const messages = useSelector(getMessagesInfo);
   const currentMesseges = messages.filter((messege) => messege.channelId === currentChannelId);
   const auth = useAuth();
   useEffect(() => {

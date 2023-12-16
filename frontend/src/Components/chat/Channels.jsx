@@ -2,16 +2,17 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import ChannelsList from './ChannelsList';
-import ChannelIcon from '../../icons/ChannelIcon';
+import ChannelIcon from '../icons/ChannelIcon.jsx';
 import { setCurrentChannel } from '../../slices/channelsSlice';
 import { open } from '../../slices/modalSlice';
+import { getChannelsInfo } from '../../selectors/index.js';
 
 const Channels = () => {
   const channelsListRef = useRef(null);
   const addButtonRef = useRef(null);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { channels, currentChannelId } = useSelector((state) => state.channelsInfo);
+  const { channels, currentChannelId } = useSelector(getChannelsInfo);
   const [prevChannelsLength, setPrevChannelsLength] = useState(null);
 
   const handleChannelClick = (id) => dispatch(setCurrentChannel(id));

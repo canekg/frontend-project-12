@@ -4,14 +4,15 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { useRollbar } from '@rollbar/react';
 import { close } from '../../slices/modalSlice';
-import { useSocket } from '../../hooks';
+import { useSocket } from '../../context/SocketProvider.jsx';
+import { getchannalIdModal, getIsOpenedModal } from '../../selectors/index.js';
 
 const Remove = () => {
   const { t } = useTranslation();
   const rollbar = useRollbar();
   const dispatch = useDispatch();
-  const isOpened = useSelector((state) => state.modal.isOpened);
-  const channalId = useSelector((state) => state.modal.extra.channalId);
+  const isOpened = useSelector(getIsOpenedModal);
+  const channalId = useSelector(getchannalIdModal);
   const sokcet = useSocket();
   const hendleClose = () => dispatch(close());
   const handleRemove = async () => {

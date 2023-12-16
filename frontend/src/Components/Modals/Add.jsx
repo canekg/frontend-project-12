@@ -8,16 +8,18 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useRollbar } from '@rollbar/react';
 import { close } from '../../slices/modalSlice';
-import { useSocket, useFilter } from '../../hooks/index';
+import { useSocket } from '../../context/SocketProvider.jsx';
+import { useFilter } from '../../context/FilterProvider.jsx';
+import { getExistingChannels, getIsOpenedModal } from '../../selectors/index.js';
 
 const Add = () => {
   const filterWords = useFilter();
   const { t } = useTranslation();
   const socket = useSocket();
   const inputRef = useRef(null);
-  const existingChannels = useSelector((state) => state.channelsInfo.channels.map((channel) => channel.name));
+  const existingChannels = useSelector(getExistingChannels);
   const dispath = useDispatch();
-  const isOpened = useSelector((state) => state.modal.isOpened);
+  const isOpened = useSelector(getIsOpenedModal);
   const rollbar = useRollbar();
   const hendleClose = () => dispath(close());
 

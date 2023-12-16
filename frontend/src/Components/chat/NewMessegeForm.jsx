@@ -4,8 +4,11 @@ import { useTranslation } from 'react-i18next';
 import * as yup from 'yup';
 import { useSelector } from 'react-redux';
 import { useRef, useEffect } from 'react';
-import SendMessageIcon from '../../icons/SendMessageIcon.jsx';
-import { useAuth, useSocket, useFilter } from '../../hooks';
+import SendMessageIcon from '../icons/SendMessageIcon.jsx';
+import { useAuth } from '../../context/AuthProvider.jsx';
+import { useSocket } from '../../context/SocketProvider.jsx';
+import { useFilter } from '../../context/FilterProvider.jsx';
+import { getChannelsInfo } from '../../selectors/index.js';
 
 const NewMessegeForm = () => {
   const filterWords = useFilter();
@@ -13,7 +16,7 @@ const NewMessegeForm = () => {
   const { t } = useTranslation();
   const auth = useAuth();
   const socket = useSocket();
-  const { currentChannelId } = useSelector((state) => state.channelsInfo);
+  const { currentChannelId } = useSelector(getChannelsInfo);
   const formik = useFormik({
     initialValues: { messageBody: '' },
     onSubmit: ({ messageBody }, { resetForm }) => {
