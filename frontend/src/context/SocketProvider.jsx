@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 import store from '../slices/index.js';
 import { addMessages } from '../slices/messagesSlice';
 import {
-  addChannel, removeChanneFromState, renameChannelFromState,
+  removeChanneFromState, renameChannelFromState,
 } from '../slices/channelsSlice';
 
 const SocketContext = createContext({});
