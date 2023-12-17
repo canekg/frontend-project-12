@@ -11,7 +11,7 @@ import { close } from '../../slices/modalSlice';
 import { useSocket } from '../../context/SocketProvider.jsx';
 import { useFilter } from '../../context/FilterProvider.jsx';
 import { getExistingChannels, getIsOpenedModal } from '../../selectors/index.js';
-import { addChannel, setCurrentChannel } from '../../slices/channelsSlice.js';
+import { setCurrentChannel } from '../../slices/channelsSlice.js';
 
 const Add = () => {
   const filterWords = useFilter();
