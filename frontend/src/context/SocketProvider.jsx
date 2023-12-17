@@ -18,7 +18,7 @@ const SocketProvider = ({ children }) => {
   const socket = io();
 
   socket.on('newMessage', (payload) => store.dispatch(addMessages(payload)));
-  socket.on('newChannel', (payload) => addChannel(payload));
+  socket.on('newChannel', (payload) => store.dispatch(addChannel(payload)));
   socket.on('removeChannel', (payload) => store.dispatch(removeChanneFromState(payload)));
   socket.on('renameChannel', (payload) => store.dispatch(renameChannelFromState(payload)));
 
