@@ -50,7 +50,6 @@ const Add = () => {
       };
       try {
         const channel = await socket.newChannel(newChannel);
-        dispatch(addChannel(channel));
         dispatch(setCurrentChannel(channel.id));
         toast.success(t('notifications.addChannel'));
         resetForm();
