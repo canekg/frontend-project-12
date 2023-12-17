@@ -11,6 +11,7 @@ import { close } from '../../slices/modalSlice';
 import { useSocket } from '../../context/SocketProvider.jsx';
 import { useFilter } from '../../context/FilterProvider.jsx';
 import { getExistingChannels, getIsOpenedModal } from '../../selectors/index.js';
+import { setCurrentChannel } from '../../slices/channelsSlice';
 
 const Add = () => {
   const filterWords = useFilter();
@@ -18,10 +19,10 @@ const Add = () => {
   const socket = useSocket();
   const inputRef = useRef(null);
   const existingChannels = useSelector(getExistingChannels);
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
   const isOpened = useSelector(getIsOpenedModal);
   const rollbar = useRollbar();
-  const hendleClose = () => dispath(close());
+  const hendleClose = () => dispatch(close());
 
   useEffect(() => {
     if (inputRef.current) {
@@ -42,11 +43,12 @@ const Add = () => {
     }),
     validateOnBlur: false,
     validateOnChange: false,
-    onSubmit: async ({ name }, { resetForm }) => {
-      const filteredNameChannel = filterWords(name);
+    onSubmit: async (data, { resetForm }) => {
+      const filteredNameChannel = filterWords(data.name);
 
       try {
         await socket.newChannel(filteredNameChannel);
+        dispatch(setCurrentChannel(data.id));
         toast.success(t('notifications.addChannel'));
         resetForm();
       } catch (error) {

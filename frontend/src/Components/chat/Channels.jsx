@@ -16,7 +16,7 @@ const Channels = () => {
   const [prevChannelsLength, setPrevChannelsLength] = useState(null);
 
   const handleChannelClick = (id) => dispatch(setCurrentChannel(id));
-  const hendleAddChannel = () => dispatch(open({ type: 'addChannel' }));
+  const handleAddChannel = () => dispatch(open({ type: 'addChannel' }));
   const handleRemoveChannel = (id) => dispatch(open({ type: 'removeChannel', extra: { channalId: id } }));
   const handleRenameChannel = (id) => dispatch(open({ type: 'renameChannel', extra: { channalId: id } }));
 
@@ -50,7 +50,7 @@ const Channels = () => {
           ref={addButtonRef}
           type="button"
           className="p-0 text-primary btn btn-group-vertical"
-          onClick={hendleAddChannel}
+          onClick={handleAddChannel}
         >
           <ChannelIcon />
           <span className="visually-hidden">+</span>
