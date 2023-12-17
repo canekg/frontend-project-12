@@ -3,12 +3,24 @@ import {
 } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import io from 'socket.io-client';
+import store from '../slices/index.js';
+import { addMessages } from '../slices/messagesSlice';
+import {
+  addChannel, removeChanneFromState, renameChannelFromState,
+} from '../slices/channelsSlice';
 
 const SocketContext = createContext({});
 export const useSocket = () => useContext(SocketContext);
 
-const SocketProvider = ({ socket, children }) => {
+const SocketProvider = ({ children }) => {
   const { t } = useTranslation();
+  const socket = io();
+
+  socket.on('newMessage', (payload) => store.dispatch(addMessages(payload)));
+  socket.on('newChannel', (payload) => store.dispatch(addChannel(payload)));
+  socket.on('removeChannel', (payload) => store.dispatch(removeChanneFromState(payload)));
+  socket.on('renameChannel', (payload) => store.dispatch(renameChannelFromState(payload)));
 
   const newMessage = useCallback(async (messageData) => {
     socket.emit('newMessage', messageData, (response) => {
