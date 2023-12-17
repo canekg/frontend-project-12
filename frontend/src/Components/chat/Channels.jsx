@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import ChannelsList from './ChannelsList';
@@ -13,34 +13,11 @@ const Channels = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { channels, currentChannelId } = useSelector(getChannelsInfo);
-  const [prevChannelsLength, setPrevChannelsLength] = useState(null);
 
   const handleChannelClick = (id) => dispatch(setCurrentChannel(id));
   const handleAddChannel = () => dispatch(open({ type: 'addChannel' }));
   const handleRemoveChannel = (id) => dispatch(open({ type: 'removeChannel', extra: { channalId: id } }));
   const handleRenameChannel = (id) => dispatch(open({ type: 'renameChannel', extra: { channalId: id } }));
-
-  useEffect(() => {
-    const focusedChannel = channels.find((channel) => channel.id === currentChannelId);
-    const lastChannel = channels[channels.length - 1];
-    if (channelsListRef.current) {
-      if (currentChannelId === 1) {
-        channelsListRef.current.scrollTop = 0;
-      } else if (focusedChannel && focusedChannel.id === lastChannel.id) {
-        channelsListRef.current.scrollTop = channelsListRef.current.scrollHeight;
-      }
-    }
-  }, [channels, currentChannelId]);
-
-  useEffect(() => {
-    if (channels.length > prevChannelsLength && prevChannelsLength && channels.length !== 2) {
-      console.log(prevChannelsLength, channels.length);
-      const currentId = channels[channels.length - 1].id;
-      dispatch(setCurrentChannel(currentId));
-    }
-    setPrevChannelsLength(channels.length);
-    addButtonRef.current.focus();
-  }, [channels, dispatch, prevChannelsLength, addButtonRef]);
 
   return (
     <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
