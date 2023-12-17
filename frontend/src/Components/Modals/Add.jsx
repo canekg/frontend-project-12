@@ -11,7 +11,7 @@ import { close } from '../../slices/modalSlice';
 import { useSocket } from '../../context/SocketProvider.jsx';
 import { useFilter } from '../../context/FilterProvider.jsx';
 import { getExistingChannels, getIsOpenedModal } from '../../selectors/index.js';
-import { setCurrentChannel } from '../../slices/channelsSlice';
+import { addChannel, setCurrentChannel } from '../../slices/channelsSlice.js';
 
 const Add = () => {
   const filterWords = useFilter();
@@ -43,15 +43,21 @@ const Add = () => {
     }),
     validateOnBlur: false,
     validateOnChange: false,
-    onSubmit: async (data, { resetForm }) => {
-      const filteredNameChannel = filterWords(data.name);
-
+    onSubmit: async ({ name }, { resetForm }) => {
+      const filteredNameChannel = filterWords(name);
+      const newChannel = {
+        name: filteredNameChannel,
+      };
       try {
-        await socket.newChannel(filteredNameChannel);
-        dispatch(setCurrentChannel(data.id));
-        toast.success(t('notifications.addChannel'));
+        await socket.newChannel(newChannel)
+          .then((channel) => {
+            dispatch(addChannel(channel));
+            dispatch(setCurrentChannel(channel.id));
+            toast.success(t('notifications.addChannel'));
+          });
         resetForm();
       } catch (error) {
+        console.log(error);
         toast.error(t('notifications.errorAddChannel'));
         rollbar.error('AddChannel', error);
       } finally {

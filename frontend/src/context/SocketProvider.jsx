@@ -18,7 +18,7 @@ const SocketProvider = ({ children }) => {
   const socket = io();
 
   socket.on('newMessage', (payload) => store.dispatch(addMessages(payload)));
-  socket.on('newChannel', (payload) => store.dispatch(addChannel(payload)));
+  socket.on('newChannel', (payload) => addChannel(payload));
   socket.on('removeChannel', (payload) => store.dispatch(removeChanneFromState(payload)));
   socket.on('renameChannel', (payload) => store.dispatch(renameChannelFromState(payload)));
 
@@ -30,9 +30,13 @@ const SocketProvider = ({ children }) => {
     });
   }, [socket, t]);
 
-  const newChannel = useCallback((newNameChannel) => {
-    socket.emit('newChannel', { name: newNameChannel });
-  }, [socket]);
+  const newChannel = useCallback((newNameChannel) => new Promise((resolve) => {
+    socket.emit('newChannel', newNameChannel, (response) => {
+      if (response.status === 'ok') {
+        resolve(response.data);
+      }
+    });
+  }), [socket]);
 
   const removeChannel = useCallback((channelId) => {
     socket.emit('removeChannel', { id: channelId });
