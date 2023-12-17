@@ -31,7 +31,7 @@ const SocketProvider = ({ children }) => {
   }, [socket, t]);
 
   const newChannel = useCallback((newNameChannel) => new Promise((resolve) => {
-    socket.emit('newChannel', newNameChannel, (response) => {
+    socket.timeout(1000).emit('newChannel', newNameChannel, (response) => {
       if (response.status === 'ok') {
         resolve(response.data);
       }

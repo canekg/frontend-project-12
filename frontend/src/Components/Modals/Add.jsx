@@ -49,12 +49,10 @@ const Add = () => {
         name: filteredNameChannel,
       };
       try {
-        await socket.newChannel(newChannel)
-          .then((channel) => {
-            dispatch(addChannel(channel));
-            dispatch(setCurrentChannel(channel.id));
-            toast.success(t('notifications.addChannel'));
-          });
+        const channel = await socket.newChannel(newChannel);
+        dispatch(addChannel(channel));
+        dispatch(setCurrentChannel(channel.id));
+        toast.success(t('notifications.addChannel'));
         resetForm();
       } catch (error) {
         console.log(error);
