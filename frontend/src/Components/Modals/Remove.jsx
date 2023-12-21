@@ -13,11 +13,11 @@ const Remove = () => {
   const dispatch = useDispatch();
   const isOpened = useSelector(getIsOpenedModal);
   const channalId = useSelector(getchannalIdModal);
-  const sokcet = useSocket();
+  const socket = useSocket();
   const hendleClose = () => dispatch(close());
   const handleRemove = async () => {
     try {
-      sokcet.removeChannel(channalId);
+      socket.removeChannel(channalId);
       toast.success(t('notifications.removeChannel'));
       dispatch(close());
     } catch (error) {
