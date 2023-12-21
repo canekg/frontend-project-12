@@ -9,7 +9,7 @@ import { useRollbar } from '@rollbar/react';
 import { close } from '../../slices/modalSlice';
 import { useSocket } from '../../context/SocketProvider.jsx';
 import { useFilter } from '../../context/FilterProvider.jsx';
-import { getchannalIdModal, getChannelsInfo } from '../../selectors/index.js';
+import { getchannalIdModal, getExistingChannels, getOldNameChannel } from '../../selectors/index.js';
 
 const Rename = () => {
   const filterWords = useFilter();
@@ -19,9 +19,8 @@ const Rename = () => {
   const rollbar = useRollbar();
   const inputRef = useRef(null);
   const channalId = useSelector(getchannalIdModal);
-  const { channels } = useSelector(getChannelsInfo);
-  const existingChannels = channels.map((channel) => channel.name);
-  const oldNameChannel = channels.find((channel) => channel.id === channalId)?.name || '';
+  const existingChannels = useSelector(getExistingChannels);
+  const oldNameChannel = useSelector(getOldNameChannel);
 
   const formik = useFormik({
     initialValues: { name: oldNameChannel },
