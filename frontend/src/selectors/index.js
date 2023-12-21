@@ -1,9 +1,6 @@
-import getChannelsInfo from './channelsSelectors.js';
+import { getChannelsInfo, getExistingChannels, getOldNameChannel } from './channelsSelectors.js';
 import getMessagesInfo from './messagesSelectors.js';
-import getExistingChannels from './existingChannelsSelectors.js';
-import getIsOpenedModal from './isOpenedModalSelectors.js';
-import getchannalIdModal from './channalIdModalSelectors.js';
-import getTypeModal from './typeModalSelectors.js';
+import { getchannalIdModal, getIsOpenedModal, getTypeModal } from './modalSelectors.js';
 
 export {
   getChannelsInfo,
@@ -12,4 +9,5 @@ export {
   getIsOpenedModal,
   getchannalIdModal,
   getTypeModal,
+  getOldNameChannel,
 };
