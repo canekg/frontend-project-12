@@ -28,10 +28,10 @@ const Rename = () => {
     validationSchema: yup.object().shape({
       name: yup
         .string()
-        .required('обязательное поле')
-        .min(3, 'минимум 3 символа')
-        .max(20, 'максимум 20 символов')
-        .test('is-unique', 'Должно быть уникальным', (value) => !existingChannels.includes(value)),
+        .required(t('validation.emptyField'))
+        .min(3, t('validation.minMaxsimSymbols'))
+        .max(20, t('validation.minMaxsimSymbols'))
+        .test('is-unique', t('validation.uniqueness'), (value) => !existingChannels.includes(value)),
     }),
     onSubmit: async ({ name }) => {
       const filteredRename = filterWords(name);
