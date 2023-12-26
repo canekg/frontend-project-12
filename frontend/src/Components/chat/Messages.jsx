@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useRef, useEffect } from 'react';
 import NewMessegeForm from './NewMessegeForm';
 import { useAuth } from '../../context/AuthProvider.jsx';
-import { getChannelsInfo, getMessagesInfo } from '../../selectors/index.js';
+import { getChannelsInfo, getCurrentMessages } from '../../selectors/index.js';
 
 const Messages = () => {
   const messagesRef = useRef(null);
@@ -11,8 +11,7 @@ const Messages = () => {
   const currentChannel = channels.filter((channel) => currentChannelId === channel.id)[0];
   const currentName = currentChannel ? currentChannel.name : '';
   const { t } = useTranslation();
-  const messages = useSelector(getMessagesInfo);
-  const currentMesseges = messages.filter((messege) => messege.channelId === currentChannelId);
+  const currentMesseges = useSelector(getCurrentMessages);
   const auth = useAuth();
   useEffect(() => {
     if (messagesRef.current) {
