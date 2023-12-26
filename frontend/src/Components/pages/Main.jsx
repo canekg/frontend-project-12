@@ -13,8 +13,7 @@ const MainPage = () => {
   const { t } = useTranslation();
   const auth = useAuth();
   const dispatch = useDispatch();
-  const { token } = auth.user;
-  const header = token ? { Authorization: `Bearer ${token}` } : {};
+  const { header } = auth;
   const type = useSelector(getTypeModal);
 
   useEffect(() => {

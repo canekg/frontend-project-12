@@ -9,7 +9,9 @@ export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
+  const currentHeader = JSON.parse(localStorage.getItem('header'));
   const [user, setUser] = useState(currentUser);
+  const [header, setHeader] = useState(currentHeader);
 
   const logIn = useCallback(async (username, password) => {
     const { data } = await axios.post(routes.loginPath(), {
@@ -17,7 +19,11 @@ const AuthProvider = ({ children }) => {
       password,
     });
     setUser(data);
+    const { token } = data;
+    const newHeader = token ? { Authorization: `Bearer ${token}` } : {};
+    setHeader(newHeader);
     localStorage.setItem('user', JSON.stringify(data));
+    localStorage.setItem('header', JSON.stringify(newHeader));
   }, []);
 
   const logOut = useCallback(() => {
@@ -25,7 +31,9 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
   }, []);
 
-  const context = useMemo(() => ({ logIn, user, logOut }), [logIn, user, logOut]);
+  const context = useMemo(() => ({
+    logIn, user, header, logOut,
+  }), [logIn, user, header, logOut]);
   return (
     <AuthContext.Provider value={context}>
       {children}
